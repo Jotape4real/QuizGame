@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Mestre</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+
+    <main id="app-container">
+
+        <section id="screen-hub" class="screen active">
+            <header class="hub-header">
+                <h1>Quiz Mestre</h1>
+                <div class="hub-nav">
+                    <button class="btn-icon" data-target="screen-settings"><i class="fas fa-cog"></i></button>
+                    <button class="btn-icon" data-target="screen-achievements"><i class="fas fa-trophy"></i></button>
+                    <button class="btn-icon" data-target="screen-store"><i class="fas fa-store"></i></button>
+                    <button class="btn-icon" id="btn-exit"><i class="fas fa-sign-out-alt"></i></button>
+                </div>
+            </header>
+            
+            <h2>Escolha uma Matéria</h2>
+            <div class="subject-grid">
+                <button class="btn-subject" data-subject="matematica">Matemática</button>
+                <button class="btn-subject" data-subject="fisica">Física</button>
+                <button class="btn-subject" data-subject="quimica">Química</button>
+                <button class="btn-subject" data-subject="portugues">Português</button>
+                <button class="btn-subject" data-subject="geografia">Geografia</button>
+                <button class="btn-subject" data-subject="historia">História</button>
+                <button class="btn-subject" data-subject="gerais">Conhec. Gerais</button>
+            </div>
+        </section>
+
+        <section id="screen-difficulty" class="screen">
+            <button class="btn-back" data-target="screen-hub"><i class="fas fa-arrow-left"></i> Voltar</button>
+            <h2 id="difficulty-title">Matemática</h2>
+            <div class="difficulty-list">
+                <button class="btn-difficulty" data-difficulty="muito_facil">Muito Fácil</button>
+                <button class="btn-difficulty" data-difficulty="facil">Fácil</button>
+                <button class="btn-difficulty" data-difficulty="medio">Médio</button>
+                <button class="btn-difficulty" data-difficulty="dificil">Difícil</button>
+                <button class="btn-difficulty" data-difficulty="impossivel">Impossível</button>
+            </div>
+        </section>
+
+        <section id="screen-phases" class="screen">
+            <button class="btn-back" data-target="screen-difficulty"><i class="fas fa-arrow-left"></i> Voltar</button>
+            <h2 id="phases-title">Matemática - Fácil</h2>
+            <div class="phases-path-container">
+                </div>
+        </section>
+
+        <section id="screen-quiz" class="screen">
+            <div class="quiz-header">
+                <span id="question-counter">1 / 10</span>
+                <div id="timer">15</div>
+            </div>
+            <div id="question-container">
+                <h3 id="question-text">...</h3>
+            </div>
+            <div id="options-container">
+                <button class="btn-option"></button>
+                <button class="btn-option"></button>
+                <button class="btn-option"></button>
+                <button class="btn-option"></button>
+            </div>
+        </section>
+
+        <section id="screen-results" class="screen">
+            <h2 id="results-title">Fase Concluída!</h2>
+            <img src="" alt="Troféu" id="results-trophy-icon"> <p id="results-score">Você acertou 8 de 10!</p>
+            <button id="btn-next-phase" data-target="screen-phases">Próxima Fase</button>
+            <button id="btn-back-to-map" data-target="screen-phases">Voltar ao Mapa</button>
+        </section>
+
+
+        <section id="screen-settings" class="screen modal-screen">
+            <div class="modal-content">
+                <button class="btn-close-modal" data-target="screen-hub"><i class="fas fa-times"></i></button>
+                <h2>Configurações</h2>
+                
+                <div class="setting-item">
+                    <label for="volume-slider">Volume:</label>
+                    <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="0.8">
+                </div>
+                
+                <div class="setting-item">
+                    <label for="quality-toggle">Modo Economia de Bateria:</label>
+                    <input type="checkbox" id="quality-toggle">
+                </div>
+
+                <button id="btn-google-connect">Conectar com Google</button>
+                <button class="btn-back-modal" data-target="screen-hub">Voltar</button>
+            </div>
+        </section>
+
+        <section id="screen-achievements" class="screen modal-screen">
+            <div class="modal-content">
+                <button class="btn-close-modal" data-target="screen-hub"><i class="fas fa-times"></i></button>
+                <h2>Conquistas</h2>
+                <div id="achievements-list">
+                    </div>
+            </div>
+        </section>
+
+        <div id="achievement-tooltip" class="tooltip">
+            <h4 id="tooltip-title">...</h4>
+            <p id="tooltip-description"> Conquista Desbloqueada!</p>
+        </div> 
+    </main>
+
+    <script src="js/db.js"></script>
+    <script src="js/progress.js"></script>
+    <script src="js/achievements.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/main.js"></script> </body>
+</html>

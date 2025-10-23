@@ -1,0 +1,371 @@
+/* Reset Básico e Variáveis */
+:root {
+    --color-bg: #f0f2f5;
+    --color-primary: #4a90e2;
+    --color-secondary: #50e3c2;
+    --color-dark: #333;
+    --color-light: #fff;
+    --color-grey: #ccc;
+    --color-locked: #a0a0a0;
+    --color-correct: #4caf50;
+    --color-wrong: #f44336;
+    --perg-math: #4a90e2;         /* Azul */
+    --perg-math-dark: #3a75c4;
+    --perg-physics: #f5a623;      /* Laranja */
+    --perg-physics-dark: #d98f1f;
+    --perg-chem: #7ed321;         /* Verde */
+    --perg-chem-dark: #6abf1c;
+    --perg-port: #e5b50a;         /* Ouro */
+    --perg-port-dark: #c89e08;
+    --perg-geo: #50e3c2;          /* Ciano */
+    --perg-geo-dark: #40bfa0;
+    --perg-history: #bd10e0;      /* Roxo */
+    --perg-history-dark: #9e0dbf;
+    --perg-general: #d0021b;      /* Vermelho */
+    --perg-general-dark: #a80216;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background-color: var(--color-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#app-container {
+    width: 100%;
+    max-width: 450px; /* Simula um celular */
+    height: 800px;
+    max-height: 100vh;
+    background-color: var(--color-light);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    overflow: hidden;
+    position: relative;
+}
+
+/* ===== ARQUITETURA DE TELAS ===== */
+.screen {
+    display: none; /* Todas as telas começam escondidas */
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    flex-direction: column;
+    animation: fadeIn 0.3s ease;
+}
+
+.screen.active {
+    display: flex; /* A tela ativa é mostrada */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Telas de Pop-up (Modal) */
+.modal-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(0,0,0,0.4);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: var(--color-light);
+    padding: 20px;
+    border-radius: 8px;
+    width: 90%;
+    position: relative;
+}
+
+.btn-close-modal {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+
+/* ===== ESTILOS DO HUB ===== */
+.hub-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.hub-nav .btn-icon {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-grey);
+    cursor: pointer;
+    margin-left: 15px;
+}
+.hub-nav .btn-icon:hover {
+    color: var(--color-primary);
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.btn-subject {
+    padding: 20px;
+    font-size: 1.1rem; /* Levemente ajustado */
+    font-weight: bold;
+    color: var(--color-light); /* Texto branco */
+    border: none;
+    border-radius: 12px; /* Mais arredondado */
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    
+    /* Definimos as cores como variáveis locais.
+      --btn-bg-color será o fundo.
+      --btn-shadow-color será a "borda 3D".
+    */
+    background-color: var(--btn-bg-color, var(--color-primary));
+    
+    /* O EFEITO 3D (Sombra/Borda inferior) */
+    /* Sombra: X-offset, Y-offset, Blur, Spread, Color */
+    box-shadow: 0 6px 0 0 var(--btn-shadow-color, var(--color-dark));
+    
+    /* Transição rápida para o clique */
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+ }
+ .btn-subject:hover {
+    transform: translateY(-3px); /* Levanta o botão */
+    box-shadow: 0 9px 0 0 var(--btn-shadow-color, var(--color-dark)); /* A sombra "cresce" */
+    filter: brightness(1.05); /* Leve brilho */
+ }
+ .btn-subject:active {
+    /* EFEITO DE PRESSIONAR */
+    transform: translateY(2px); /* Afunda o botão */
+    box-shadow: 0 2px 0 0 var(--btn-shadow-color, var(--color-dark)); /* Sombra diminui */
+    filter: brightness(0.95);}
+
+    .btn-subject[data-subject="matematica"] {
+        --btn-bg-color: var(--perg-math);
+        --btn-shadow-color: var(--perg-math-dark);
+    }
+    .btn-subject[data-subject="fisica"] {
+        --btn-bg-color: var(--perg-physics);
+        --btn-shadow-color: var(--perg-physics-dark);
+    }
+    .btn-subject[data-subject="quimica"] {
+        --btn-bg-color: var(--perg-chem);
+        --btn-shadow-color: var(--perg-chem-dark);
+    }
+    .btn-subject[data-subject="portugues"] {
+        --btn-bg-color: var(--perg-port);
+        --btn-shadow-color: var(--perg-port-dark);
+    }
+    .btn-subject[data-subject="geografia"] {
+        --btn-bg-color: var(--perg-geo);
+        --btn-shadow-color: var(--perg-geo-dark);
+    }
+    .btn-subject[data-subject="historia"] {
+        --btn-bg-color: var(--perg-history);
+        --btn-shadow-color: var(--perg-history-dark);
+    }
+    .btn-subject[data-subject="gerais"] {
+        --btn-bg-color: var(--perg-general);
+        --btn-shadow-color: var(--perg-general-dark);}
+
+ /* ===== ESTILOS DE DIFICULDADE & FASES ===== */
+ .btn-back {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: var(--color-primary);
+    cursor: pointer;
+    align-self: flex-start;
+    margin-bottom: 20px;
+}
+
+.difficulty-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.btn-difficulty {
+    padding: 15px;
+    font-size: 1.1rem;
+    border: 2px solid var(--color-primary);
+    background-color: var(--color-light);
+    color: var(--color-primary);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* ===== ESTILOS DAS CONQUISTAS ===== */
+#achievements-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.achievement-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 10px;
+    border: 1px solid var(--color-grey);
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.achievement-item .icon {
+    font-size: 2rem;
+}
+
+.achievement-item.locked {
+    background-color: #f9f9f9;
+}
+
+.achievement-item.locked .icon {
+    color: var(--color-locked);
+}
+
+.achievement-item.unlocked .icon {
+    color: var(--color-secondary); /* Cor de desbloqueado */
+}
+
+/* O "HUDzinho" Tooltip */
+.tooltip {
+    display: none; /* Começa escondido */
+    position: absolute;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    padding: 10px 15px;
+    border-radius: 5px;
+    z-index: 100;
+    width: 250px;
+    pointer-events: none; /* Para não interferir com o mouse */
+}
+.tooltip.active {
+    display: block;
+}
+
+/* ===== ESTILOS DO QUIZ ===== */
+#options-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-option {
+    padding: 15px;
+    font-size: 1rem;
+    border: 2px solid var(--color-grey);
+    background-color: var(--color-light);
+    border-radius: 8px;
+    text-align: left;
+    cursor: pointer;
+}
+
+.btn-option.correct {
+    background-color: var(--color-correct);
+    color: white;
+    border-color: var(--color-correct);
+}
+.btn-option.wrong {
+    background-color: var(--color-wrong);
+    color: white;
+    border-color: var(--color-wrong);
+}
+.btn-option.disabled {
+    pointer-events: none;
+    opacity: 0.7;
+}
+.achievement-toast {
+    position: absolute;
+    bottom: -100px; /* Começa fora da tela */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 350px;
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 200;
+    border: 2px solid var(--color-secondary);
+    transition: bottom 0.5s ease-in-out;
+}
+
+.achievement-toast.show {
+    bottom: 20px; /* Posição final na tela */
+}
+
+.achievement-toast .fas {
+    font-size: 2rem;
+    color: var(--color-secondary);
+}
+/* =================================== */
+/* ===== ESTILOS RESPONSIVOS (PC) ==== */
+/* =================================== */
+
+/* Este bloco SÓ será aplicado se a largura da tela
+   for de 768 pixels ou mais (tablets e desktops) */
+   @media (min-width: 768px) {
+    
+    /* 1. Aumentamos o container principal */
+    #app-container {
+        /* Removemos o limite de celular */
+        max-width: 1200px;  /* Um limite bom para PC (não estica demais) */
+        
+        /* Damos uma altura mais "PC" */
+        height: 90vh;       /* 90% da altura da tela */
+        max-height: 800px;  /* Um limite máximo de altura */
+    }
+
+    /* 2. Corrigimos o tamanho dos pop-ups (Config, Conquistas) */
+    .modal-content {
+        max-width: 600px; /* No celular era 90% (o que fica enorme no PC) */
+    }
+
+    /* 3. Ajustamos o grid de Matérias */
+    .subject-grid {
+        /* Em vez de 2 colunas, usamos 4 */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+    }
+
+    /* 4. Ajustamos as Opções do Quiz */
+    #options-container {
+        /* Em vez de 1 coluna de botões, usamos 2 */
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* 5. (Bônus) Ajustar o grid de Dificuldade */
+    .difficulty-list {
+        /* Também fica melhor em 2 colunas */
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
